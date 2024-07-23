@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct OrganicPracticeApp: App {
+    @State private var tiles = GameViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            GameView()
+                .environment(tiles)
         }
     }
 }
