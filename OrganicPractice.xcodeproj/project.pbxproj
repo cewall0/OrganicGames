@@ -8,25 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		0B47D95C2C4EDEB8008F94E0 /* OrganicPracticeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B47D95B2C4EDEB8008F94E0 /* OrganicPracticeApp.swift */; };
-		0B47D95E2C4EDEB8008F94E0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B47D95D2C4EDEB8008F94E0 /* ContentView.swift */; };
 		0B47D9602C4EDEBD008F94E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B47D95F2C4EDEBD008F94E0 /* Assets.xcassets */; };
 		0B47D9632C4EDEBD008F94E0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B47D9622C4EDEBD008F94E0 /* Preview Assets.xcassets */; };
 		0B47D96B2C4EE085008F94E0 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B47D9692C4EE085008F94E0 /* Tile.swift */; };
 		0B47D96E2C4EE0B2008F94E0 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B47D96C2C4EE0B2008F94E0 /* GameViewModel.swift */; };
 		0B47D9732C4EE0BC008F94E0 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B47D96F2C4EE0BC008F94E0 /* GameView.swift */; };
 		0B47D9752C4EE0BC008F94E0 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B47D9712C4EE0BC008F94E0 /* SplashScreenView.swift */; };
+		0BB407992C52DB04005F2A7F /* GameChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB407982C52DB04005F2A7F /* GameChoiceView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0B47D9582C4EDEB8008F94E0 /* OrganicPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrganicPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B47D95B2C4EDEB8008F94E0 /* OrganicPracticeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganicPracticeApp.swift; sourceTree = "<group>"; };
-		0B47D95D2C4EDEB8008F94E0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0B47D95F2C4EDEBD008F94E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0B47D9622C4EDEBD008F94E0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0B47D9692C4EE085008F94E0 /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		0B47D96C2C4EE0B2008F94E0 /* GameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		0B47D96F2C4EE0BC008F94E0 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		0B47D9712C4EE0BC008F94E0 /* SplashScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
+		0BB407982C52DB04005F2A7F /* GameChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameChoiceView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +60,6 @@
 			isa = PBXGroup;
 			children = (
 				0B47D95B2C4EDEB8008F94E0 /* OrganicPracticeApp.swift */,
-				0B47D95D2C4EDEB8008F94E0 /* ContentView.swift */,
 				0B47D95F2C4EDEBD008F94E0 /* Assets.xcassets */,
 				0B47D96A2C4EE085008F94E0 /* Models */,
 				0B47D96D2C4EE0B2008F94E0 /* ViewModels */,
@@ -99,6 +98,7 @@
 			children = (
 				0B47D96F2C4EE0BC008F94E0 /* GameView.swift */,
 				0B47D9712C4EE0BC008F94E0 /* SplashScreenView.swift */,
+				0BB407982C52DB04005F2A7F /* GameChoiceView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -176,9 +176,9 @@
 				0B47D9752C4EE0BC008F94E0 /* SplashScreenView.swift in Sources */,
 				0B47D96E2C4EE0B2008F94E0 /* GameViewModel.swift in Sources */,
 				0B47D96B2C4EE085008F94E0 /* Tile.swift in Sources */,
-				0B47D95E2C4EDEB8008F94E0 /* ContentView.swift in Sources */,
 				0B47D95C2C4EDEB8008F94E0 /* OrganicPracticeApp.swift in Sources */,
 				0B47D9732C4EE0BC008F94E0 /* GameView.swift in Sources */,
+				0BB407992C52DB04005F2A7F /* GameChoiceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
