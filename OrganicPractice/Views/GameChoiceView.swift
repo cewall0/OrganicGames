@@ -21,12 +21,10 @@ struct GameChoiceView: View {
     }
     
     init() {
-        
-        //This will change the font size
         UISegmentedControl.appearance().setTitleTextAttributes([.font : UIFont.preferredFont(forTextStyle: .headline)], for: .highlighted)
         UISegmentedControl.appearance().setTitleTextAttributes([.font : UIFont.preferredFont(forTextStyle: .title2)], for: .normal)
-        
     }
+    
     var body: some View {
         
         @Bindable var gameViewModel = gameViewModel
@@ -45,19 +43,27 @@ struct GameChoiceView: View {
                 Text("")
                 Button(action: {
                     reset()
-                    path.append(1)
+                    path.append(1) // Functional Groups
                 }, label: {
                     Text("Functional Groups")
                 })
                 Text("")
-    
+                Button(action: {
+                    reset()
+                    path.append(2) // Functional Group Suffixes
+                }, label: {
+                    Text("Functional Group Suffixes")
+                })
+                Text("")
                 Spacer()
                 
             }
             .navigationDestination(for: Int.self) { destination in
                 switch destination {
                 case 1:
-                    GameView(path: $path)
+                    GameView(path: $path, tileRange: 1...18)
+                case 2:
+                    GameView(path: $path, tileRange: 19...34)
                 default:
                     EmptyView()
                 }

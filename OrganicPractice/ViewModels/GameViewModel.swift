@@ -18,11 +18,11 @@ final class GameViewModel {
     var gameCompleted: Bool = false // Track if the game is completed
 
     init() {
-        resetGame()
+        resetGame(tileRange: 1...18)
     }
     
-    func resetGame() {
-        let tileNames = (1...18).flatMap { ["\($0 < 10 ? "0" : "")\($0)A", "\($0 < 10 ? "0" : "")\($0)B"] }
+    func resetGame(tileRange: ClosedRange<Int>) {
+        let tileNames = tileRange.flatMap { ["\($0 < 10 ? "0" : "")\($0)A", "\($0 < 10 ? "0" : "")\($0)B"] }
         tiles = tileNames.map { Tile(name: $0) }.shuffled()
         selectedTiles = []
         tilePositions = [:]

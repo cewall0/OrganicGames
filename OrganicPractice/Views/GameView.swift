@@ -12,6 +12,7 @@ struct GameView: View {
     @Environment(GameViewModel.self) private var viewModel
     
     @Binding var path: NavigationPath
+    var tileRange: ClosedRange<Int>
     
     func resetPath() {
         self.path = NavigationPath()
@@ -43,7 +44,7 @@ struct GameView: View {
                     
                     Text (" ")
                     Button("Play Again") {
-                        viewModel.resetGame()
+                        viewModel.resetGame(tileRange: tileRange)
                     }
                     .padding()
                     .background(.myBlue)
@@ -70,7 +71,7 @@ struct GameView: View {
                     Spacer()
                     HStack {
                         Button("Reset Game") {
-                            viewModel.resetGame()
+                            viewModel.resetGame(tileRange: tileRange)
                         }
                         .padding()
                         .background(.myBlue)
@@ -93,7 +94,7 @@ struct GameView: View {
         .background(Color.white)
         .edgesIgnoringSafeArea(.all)
         .onAppear {
-            viewModel.resetGame()
+            viewModel.resetGame(tileRange: tileRange)
         }
     }
 
