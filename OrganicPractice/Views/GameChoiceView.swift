@@ -8,30 +8,15 @@
 import SwiftUI
 
 struct GameChoiceView: View {
-    
-    @Environment(GameViewModel.self) private var gameViewModel
-    
-    @Environment(\.verticalSizeClass) var heightSizeClass: UserInterfaceSizeClass?
-    @Environment(\.horizontalSizeClass) var widthSizeClass: UserInterfaceSizeClass?
-    
     @State var path = NavigationPath()
-    
+
     func reset() {
         self.path = NavigationPath()
     }
-    
-    init() {
-        UISegmentedControl.appearance().setTitleTextAttributes([.font : UIFont.preferredFont(forTextStyle: .headline)], for: .highlighted)
-        UISegmentedControl.appearance().setTitleTextAttributes([.font : UIFont.preferredFont(forTextStyle: .title2)], for: .normal)
-    }
-    
+
     var body: some View {
-        
-        @Bindable var gameViewModel = gameViewModel
-        
         NavigationStack(path: $path) {
-            
-            VStack{
+            VStack {
                 Text("")
                 Text("")
                 Text("")
@@ -43,35 +28,41 @@ struct GameChoiceView: View {
                 Text("")
                 Button(action: {
                     reset()
-                    path.append(1) // Functional Groups
+                    path.append(GameType.game1)
                 }, label: {
                     Text("Functional Groups")
                 })
                 Text("")
                 Button(action: {
                     reset()
-                    path.append(2) // Functional Group Suffixes
+                    path.append(GameType.game2)
                 }, label: {
                     Text("Functional Group Suffixes")
                 })
                 Text("")
+                Button(action: {
+                    reset()
+                    path.append(GameType.game3)
+                }, label: {
+                    Text("Formal Charges")
+                })
+                Text("")
                 Spacer()
-                
             }
-            .navigationDestination(for: Int.self) { destination in
-                switch destination {
-                case 1:
-                    GameView(path: $path, tileRange: 1...18)
-                case 2:
-                    GameView(path: $path, tileRange: 19...34)
-                default:
-                    EmptyView()
-                }
+            .navigationDestination(for: GameType.self) { gameType in
+                GameView(path: $path, tileRange: getTileRange(for: gameType), gameType: gameType)
             }
         }
     }
-}
 
-#Preview {
-    GameChoiceView()
+    private func getTileRange(for gameType: GameType) -> ClosedRange<Int> {
+        switch gameType {
+        case .game1:
+            return 1...18
+        case .game2:
+            return 19...34
+        case .game3:
+            return 1...23
+        }
+    }
 }

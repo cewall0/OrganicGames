@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import Observation
+import Combine
 
 @Observable
 final class GameViewModel {
@@ -15,52 +15,39 @@ final class GameViewModel {
     var selectedTiles: [Tile] = []
     var tilePositions: [UUID: CGPoint] = [:]
     var tileRotations: [UUID: Double] = [:]
-    var gameCompleted: Bool = false // Track if the game is completed
+    var gameType: GameType
+    var gameCompleted: Bool = false
 
-    init() {
-        resetGame(tileRange: 1...18)
+    init(gameType: GameType) {
+        self.gameType = gameType
+        resetGame(for: gameType)
     }
-    
-    func resetGame(tileRange: ClosedRange<Int>) {
-        let tileNames = tileRange.flatMap { ["\($0 < 10 ? "0" : "")\($0)A", "\($0 < 10 ? "0" : "")\($0)B"] }
-        tiles = tileNames.map { Tile(name: $0) }.shuffled()
+
+    func resetGame(for gameType: GameType) {
+        switch gameType {
+        case .game1:
+            let tileNames = (1...18).map { ["G1_Tile\($0)A", "G1_Tile\($0)B"] }
+            let shuffledPairs = tileNames.shuffled()
+            let tileStrings = shuffledPairs.flatMap { $0 }
+            tiles = tileStrings.map { Tile(name: $0) }
+            
+        case .game2:
+            let tileNames = (19...34).map { ["G2_Tile\($0)A", "G2_Tile\($0)B"] }
+            let shuffledPairs = tileNames.shuffled()
+            let tileStrings = shuffledPairs.flatMap { $0 }
+            tiles = tileStrings.map { Tile(name: $0) }
+           
+        case .game3:
+            let tileNames = (1...20).map { "G3_Atom\($0)" } + ["G3_Charge_minus", "G3_Charge0", "G3_Charge_plus"]
+            tiles = tileNames.map { Tile(name: $0) }.shuffled()
+        }
         selectedTiles = []
         tilePositions = [:]
         tileRotations = [:]
-        gameCompleted = false
-        generateRandomPositionsAndRotations(for: tiles) // Pass all tiles for initial placement
+        generateRandomPositionsAndRotations()
     }
 
-    func scrambleRemainingTiles() {
-        // Filter out tiles that are not yet removed (or selected)
-        let remainingTiles = tiles.filter { tile in
-            !selectedTiles.contains(where: { $0.id == tile.id })
-        }
-        
-        // Pair remaining tiles
-        var pairs: [(Tile, Tile)] = []
-        for pairIndex in stride(from: 0, to: remainingTiles.count, by: 2) {
-            guard pairIndex + 1 < remainingTiles.count else { break }
-            let tile1 = remainingTiles[pairIndex]
-            let tile2 = remainingTiles[pairIndex + 1]
-            pairs.append((tile1, tile2))
-        }
-        
-        // Shuffle the pairs
-        pairs.shuffle()
-        
-        // Flatten shuffled pairs into a single list of tiles
-        let shuffledTiles = pairs.flatMap { [$0.0, $0.1] }
-        
-        // Clear existing tile positions and rotations
-        tilePositions = [:]
-        tileRotations = [:]
-        
-        // Generate new positions and rotations for the shuffled tiles
-        generateRandomPositionsAndRotations(for: shuffledTiles)
-    }
-
-    func generateRandomPositionsAndRotations(for tiles: [Tile]) {
+    func generateRandomPositionsAndRotations() {
         let screenWidth = UIScreen.main.bounds.width
         let screenHeight = UIScreen.main.bounds.height
         let tileSize: CGFloat = 140
@@ -110,24 +97,21 @@ final class GameViewModel {
         }
     }
 
-    func generatePositionAndRotation(for zoneIndex: Int, tileSize: CGFloat, zoneWidth: CGFloat, zoneHeight: CGFloat, safePadding: CGFloat, safeAreaInsets: UIEdgeInsets) -> (CGPoint, Double) {
-        let row = zoneIndex / 7
-        let column = zoneIndex % 7
+    private func generatePositionAndRotation(for zoneIndex: Int, tileSize: CGFloat, zoneWidth: CGFloat, zoneHeight: CGFloat, safePadding: CGFloat, safeAreaInsets: UIEdgeInsets) -> (CGPoint, Double) {
+        let zonesPerRow = 7
+        let row = zoneIndex / zonesPerRow
+        let col = zoneIndex % zonesPerRow
 
-        let xMin = safePadding + CGFloat(column) * zoneWidth
-        let xMax = safePadding + CGFloat(column + 1) * zoneWidth - tileSize
-        let yMin = safePadding + safeAreaInsets.top + CGFloat(row) * zoneHeight
-        let yMax = safePadding + safeAreaInsets.top + CGFloat(row + 1) * zoneHeight - tileSize
+        let xPosition = safePadding + CGFloat(col) * zoneWidth + zoneWidth / 2
+        let yPosition = safePadding + safeAreaInsets.top + CGFloat(row) * zoneHeight + zoneHeight / 2
 
-        // Ensure valid ranges
-        let xPosition = xMin < xMax ? CGFloat.random(in: xMin...xMax) : xMin
-        let yPosition = yMin < yMax ? CGFloat.random(in: yMin...yMax) : yMin
+        let position = CGPoint(x: xPosition, y: yPosition)
         let rotation = Double.random(in: -40...40)
 
-        return (CGPoint(x: xPosition, y: yPosition), rotation)
+        return (position, rotation)
     }
 
-    func areZonesFarEnoughApart(_ zone1: Int, _ zone2: Int, zonesPerRow: Int, minDistance: Int) -> Bool {
+    private func areZonesFarEnoughApart(_ zone1: Int, _ zone2: Int, zonesPerRow: Int, minDistance: Int) -> Bool {
         let row1 = zone1 / zonesPerRow
         let col1 = zone1 % zonesPerRow
         let row2 = zone2 / zonesPerRow
@@ -137,6 +121,32 @@ final class GameViewModel {
         let colDistance = abs(col1 - col2)
 
         return rowDistance >= minDistance || colDistance >= minDistance
+    }
+
+    private func getSafeAreaInsets() -> UIEdgeInsets {
+           guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+               return .zero
+           }
+           return windowScene.windows.first?.safeAreaInsets ?? .zero
+       }
+
+    func scrambleRemainingTiles() {
+        let screenWidth = UIScreen.main.bounds.width
+        let screenHeight = UIScreen.main.bounds.height
+        let tileSize: CGFloat = 100
+        let padding: CGFloat = 20
+        let safeAreaInsets = getSafeAreaInsets()
+        let safePadding = padding + tileSize / 2 // Ensure the entire tile fits within the safe area
+
+        for tile in tiles {
+            if tilePositions[tile.id] != nil {
+                let xPosition = CGFloat.random(in: safePadding...(screenWidth - safePadding - tileSize))
+                let yPosition = CGFloat.random(in: safePadding + safeAreaInsets.top...(screenHeight - safePadding - safeAreaInsets.bottom - tileSize))
+
+                tilePositions[tile.id] = CGPoint(x: xPosition, y: yPosition)
+                tileRotations[tile.id] = Double.random(in: -30...30)
+            }
+        }
     }
 
     func selectTile(_ tile: Tile) {
@@ -154,7 +164,9 @@ final class GameViewModel {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     self.tiles.removeAll { $0.id == self.selectedTiles[0].id || $0.id == self.selectedTiles[1].id }
                     self.selectedTiles.removeAll()
-                    self.checkGameCompletion()
+                    if self.tiles.isEmpty {
+                        self.gameCompleted = true
+                    }
                 }
             } else {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -162,18 +174,5 @@ final class GameViewModel {
                 }
             }
         }
-    }
-
-    func checkGameCompletion() {
-        if tiles.isEmpty {
-            gameCompleted = true
-        }
-    }
-
-    private func getSafeAreaInsets() -> UIEdgeInsets {
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
-            return .zero
-        }
-        return windowScene.windows.first?.safeAreaInsets ?? .zero
     }
 }

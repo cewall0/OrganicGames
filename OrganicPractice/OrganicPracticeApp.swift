@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct OrganicPracticeApp: App {
     
-    @State private var tiles = GameViewModel()
+    @State private var tiles = GameViewModel(gameType: .game1)
     
     var body: some Scene {
         WindowGroup {

@@ -8,19 +8,15 @@
 import SwiftUI
 
 struct GameView: View {
-    
     @Environment(GameViewModel.self) private var viewModel
-    
     @Binding var path: NavigationPath
     var tileRange: ClosedRange<Int>
-    
+    var gameType: GameType // GameType to determine the type of game
+
     func resetPath() {
         self.path = NavigationPath()
     }
-    
-    @Environment(\.verticalSizeClass) var heightSizeClass: UserInterfaceSizeClass?
-    @Environment(\.horizontalSizeClass) var widthSizeClass: UserInterfaceSizeClass?
-    
+
     var body: some View {
         ZStack {
             ForEach(viewModel.tiles) { tile in
@@ -42,9 +38,9 @@ struct GameView: View {
                         .foregroundColor(.myBlue)
                         .padding()
                     
-                    Text (" ")
+                    Text(" ")
                     Button("Play Again") {
-                        viewModel.resetGame(tileRange: tileRange)
+                        viewModel.resetGame(for: gameType) // Use the gameType to reset the game
                     }
                     .padding()
                     .background(.myBlue)
@@ -71,7 +67,7 @@ struct GameView: View {
                     Spacer()
                     HStack {
                         Button("Reset Game") {
-                            viewModel.resetGame(tileRange: tileRange)
+                            viewModel.resetGame(for: gameType) // Pass gameType here as well
                         }
                         .padding()
                         .background(.myBlue)
@@ -79,7 +75,7 @@ struct GameView: View {
                         .cornerRadius(10)
                         
                         Button("Scramble Existing Tiles") {
-                            viewModel.scrambleRemainingTiles()
+                            viewModel.scrambleRemainingTiles() // Ensure this function is implemented
                         }
                         .padding()
                         .background(.myPurple)
@@ -94,16 +90,16 @@ struct GameView: View {
         .background(Color.white)
         .edgesIgnoringSafeArea(.all)
         .onAppear {
-            viewModel.resetGame(tileRange: tileRange)
+            viewModel.resetGame(for: gameType) // Pass gameType to initialize the game
         }
     }
-
+    
     struct TileView: View {
         var tile: Tile
         var isSelected: Bool
         
         var body: some View {
-            Image(tile.name)
+            Image(tile.imageName) // Use imageName to get the correct image
                 .resizable()
                 .aspectRatio(1, contentMode: .fit)
                 .frame(width: 100, height: 100)
