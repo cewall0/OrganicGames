@@ -38,8 +38,12 @@ final class GameViewModel {
             tiles = tileStrings.map { Tile(name: $0) }
            
         case .game3:
-            let tileNames = (1...20).map { "G3_Atom\($0)" } + ["G3_Charge_minus", "G3_Charge0", "G3_Charge_plus"]
-            tiles = tileNames.map { Tile(name: $0) }.shuffled()
+            let atomTileNames = (1...20).map { "G3_Atom\($0)" }
+            let chargeMinusTileNames = Array(repeating: "G3_Charge_minus", count: 3)
+            let chargeZeroTileNames = Array(repeating: "G3_Charge0", count: 12)
+            let chargePlusTileNames = Array(repeating: "G3_Charge_plus", count: 5)
+            let allTileNames = atomTileNames + chargeMinusTileNames + chargeZeroTileNames + chargePlusTileNames
+            tiles = allTileNames.map { Tile(name: $0) }.shuffled()
         }
         selectedTiles = []
         tilePositions = [:]
@@ -137,17 +141,54 @@ final class GameViewModel {
         let padding: CGFloat = 20
         let safeAreaInsets = getSafeAreaInsets()
         let safePadding = padding + tileSize / 2 // Ensure the entire tile fits within the safe area
+        let zonesPerRow = 7
+        let zonesPerColumn = 10
+        let zoneWidth = (screenWidth - safePadding * 2) / CGFloat(zonesPerRow)
+        let zoneHeight = (screenHeight - safePadding * 2 - safeAreaInsets.top - safeAreaInsets.bottom) / CGFloat(zonesPerColumn)
 
-        for tile in tiles {
-            if tilePositions[tile.id] != nil {
-                let xPosition = CGFloat.random(in: safePadding...(screenWidth - safePadding - tileSize))
-                let yPosition = CGFloat.random(in: safePadding + safeAreaInsets.top...(screenHeight - safePadding - safeAreaInsets.bottom - tileSize))
+        var availableZones = Set(0..<(zonesPerRow * zonesPerColumn))
 
-                tilePositions[tile.id] = CGPoint(x: xPosition, y: yPosition)
-                tileRotations[tile.id] = Double.random(in: -30...30)
+        // Pair remaining tiles
+        let remainingTiles = tiles.filter { tilePositions[$0.id] != nil }
+        var pairs: [(Tile, Tile)] = []
+
+        for index in stride(from: 0, to: remainingTiles.count, by: 2) {
+            if index + 1 < remainingTiles.count {
+                let tile1 = remainingTiles[index]
+                let tile2 = remainingTiles[index + 1]
+                pairs.append((tile1, tile2))
             }
         }
+
+        // Shuffle pairs to randomize placement
+        let shuffledPairs = pairs.shuffled()
+
+        // Assign zones to each pair and place tiles
+        for (tile1, tile2) in shuffledPairs {
+            guard availableZones.count >= 2 else { break }
+
+            var zoneIndices: [Int] = []
+            repeat {
+                zoneIndices = Array(availableZones.shuffled().prefix(2))
+            } while !areZonesFarEnoughApart(zoneIndices[0], zoneIndices[1], zonesPerRow: zonesPerRow, minDistance: 2)
+
+            let zone1 = zoneIndices[0]
+            let zone2 = zoneIndices[1]
+            availableZones.remove(zone1)
+            availableZones.remove(zone2)
+
+            let (position1, rotation1) = generatePositionAndRotation(for: zone1, tileSize: tileSize, zoneWidth: zoneWidth, zoneHeight: zoneHeight, safePadding: safePadding, safeAreaInsets: safeAreaInsets)
+            let (position2, rotation2) = generatePositionAndRotation(for: zone2, tileSize: tileSize, zoneWidth: zoneWidth, zoneHeight: zoneHeight, safePadding: safePadding, safeAreaInsets: safeAreaInsets)
+
+            tilePositions[tile1.id] = position1
+            tileRotations[tile1.id] = rotation1
+            tilePositions[tile2.id] = position2
+            tileRotations[tile2.id] = rotation2
+        }
     }
+
+
+
 
     func selectTile(_ tile: Tile) {
         if selectedTiles.count < 2 {
@@ -160,19 +201,53 @@ final class GameViewModel {
 
     func checkMatch() {
         if selectedTiles.count == 2 {
-            if selectedTiles[0].number == selectedTiles[1].number && selectedTiles[0].letter != selectedTiles[1].letter {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    self.tiles.removeAll { $0.id == self.selectedTiles[0].id || $0.id == self.selectedTiles[1].id }
-                    self.selectedTiles.removeAll()
-                    if self.tiles.isEmpty {
-                        self.gameCompleted = true
+            let tile1 = selectedTiles[0]
+            let tile2 = selectedTiles[1]
+            
+            if gameType == .game3 {
+                let isMatch: Bool
+                if tile1.name.starts(with: "G3_Atom") && tile2.name.starts(with: "G3_Charge") {
+                    isMatch = (tile1.number <= 3 && tile2.name == "G3_Charge_minus") ||
+                              (tile1.number >= 4 && tile1.number <= 15 && tile2.name == "G3_Charge0") ||
+                              (tile1.number >= 16 && tile1.number <= 20 && tile2.name == "G3_Charge_plus")
+                } else if tile2.name.starts(with: "G3_Atom") && tile1.name.starts(with: "G3_Charge") {
+                    isMatch = (tile2.number <= 3 && tile1.name == "G3_Charge_minus") ||
+                              (tile2.number >= 4 && tile2.number <= 15 && tile1.name == "G3_Charge0") ||
+                              (tile2.number >= 16 && tile2.number <= 20 && tile1.name == "G3_Charge_plus")
+                } else {
+                    isMatch = false
+                }
+
+                if isMatch {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.tiles.removeAll { $0.id == tile1.id || $0.id == tile2.id }
+                        self.selectedTiles.removeAll()
+                        if self.tiles.isEmpty {
+                            self.gameCompleted = true
+                        }
+                    }
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.selectedTiles.removeAll()
                     }
                 }
-            } else {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    self.selectedTiles.removeAll()
+            } else if gameType == .game1 || gameType == .game2 {
+                if tile1.number == tile2.number && tile1.letter != tile2.letter {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.tiles.removeAll { $0.id == tile1.id || $0.id == tile2.id }
+                        self.selectedTiles.removeAll()
+                        if self.tiles.isEmpty {
+                            self.gameCompleted = true
+                        }
+                    }
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.selectedTiles.removeAll()
+                    }
                 }
             }
         }
-    }
+    } // end checkMatch function
+
+
 }

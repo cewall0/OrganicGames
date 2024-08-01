@@ -10,11 +10,12 @@ import SwiftUI
 struct GameView: View {
     @Environment(GameViewModel.self) private var viewModel
     @Binding var path: NavigationPath
-    var tileRange: ClosedRange<Int>
+    
     var gameType: GameType // GameType to determine the type of game
 
     func resetPath() {
         self.path = NavigationPath()
+        viewModel.gameCompleted = false
     }
 
     var body: some View {
@@ -40,7 +41,10 @@ struct GameView: View {
                     
                     Text(" ")
                     Button("Play Again") {
-                        viewModel.resetGame(for: gameType) // Use the gameType to reset the game
+                        
+                        viewModel.gameCompleted = false
+                        viewModel.resetGame(for: gameType)
+                        
                     }
                     .padding()
                     .background(.myBlue)
@@ -50,7 +54,10 @@ struct GameView: View {
                     Text(" ")
                     
                     Button("Choose another game") {
+                        
+                        viewModel.gameCompleted = false
                         resetPath()
+                        
                     }
                     .padding()
                     .background(.myPurple)
@@ -67,7 +74,10 @@ struct GameView: View {
                     Spacer()
                     HStack {
                         Button("Reset Game") {
-                            viewModel.resetGame(for: gameType) // Pass gameType here as well
+                            
+                            viewModel.gameCompleted = false
+                            viewModel.resetGame(for: gameType)
+                             
                         }
                         .padding()
                         .background(.myBlue)
@@ -75,7 +85,7 @@ struct GameView: View {
                         .cornerRadius(10)
                         
                         Button("Scramble Existing Tiles") {
-                            viewModel.scrambleRemainingTiles() // Ensure this function is implemented
+                            viewModel.scrambleRemainingTiles()
                         }
                         .padding()
                         .background(.myPurple)
@@ -91,6 +101,9 @@ struct GameView: View {
         .edgesIgnoringSafeArea(.all)
         .onAppear {
             viewModel.resetGame(for: gameType) // Pass gameType to initialize the game
+        }
+        .onDisappear {
+            viewModel.gameCompleted = false
         }
     }
     
