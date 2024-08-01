@@ -36,7 +36,7 @@ struct GameView: View {
                     Text("Congratulations!")
                         .font(.largeTitle)
                         .fontWeight(.bold)
-                        .foregroundColor(.myBlue)
+                        .foregroundColor(.blue)
                         .padding()
                     
                     Text(" ")
@@ -47,7 +47,7 @@ struct GameView: View {
                         
                     }
                     .padding()
-                    .background(.myBlue)
+                    .background(.blue)
                     .foregroundColor(.white)
                     .cornerRadius(10)
                     
@@ -60,7 +60,7 @@ struct GameView: View {
                         
                     }
                     .padding()
-                    .background(.myPurple)
+                    .background(.brown)
                     .foregroundColor(.white)
                     .cornerRadius(10)
                     
@@ -80,7 +80,7 @@ struct GameView: View {
                              
                         }
                         .padding()
-                        .background(.myBlue)
+                        .background(.blue)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                         
@@ -88,7 +88,7 @@ struct GameView: View {
                             viewModel.scrambleRemainingTiles()
                         }
                         .padding()
-                        .background(.myPurple)
+                        .background(.brown)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                     }
