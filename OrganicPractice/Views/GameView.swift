@@ -75,18 +75,8 @@ struct GameView: View {
                 VStack {
                     Spacer()
                     HStack {
-//                        Button("Reset Game") {
-//                            
-//                            viewModel.gameCompleted = false
-//                            viewModel.resetGame(for: gameType)
-//                             
-//                        }
-//                        .padding()
-//                        .background(.blue)
-//                        .foregroundColor(.white)
-//                        .cornerRadius(10)
                         
-                        Button("Scramble Existing Tiles") {
+                        Button("Scramble Remaining Tiles") {
                             viewModel.scrambleRemainingTiles()
                         }
                         .padding()
@@ -114,10 +104,12 @@ struct GameView: View {
         var isSelected: Bool
         
         var body: some View {
+            
+            let tileSize: CGFloat = (UIDevice.current.userInterfaceIdiom == .pad) ? 200 : 100
             Image(tile.imageName) // Use imageName to get the correct image
                 .resizable()
                 .aspectRatio(1, contentMode: .fit)
-                .frame(width: 100, height: 100)
+                .frame(width: tileSize, height: tileSize)
                 .background(isSelected ? Color.yellow.opacity(0.3) : Color.clear)
                 .cornerRadius(10)
                 .shadow(radius: 5)

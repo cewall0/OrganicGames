@@ -18,13 +18,24 @@ struct GameChoiceView: View {
     var body: some View {
         NavigationStack(path: $path) {
             VStack {
-                Text("")
-                Text("")
-                Text("")
-                Image("OrganicGamesTitle")
-                    .resizable()
-                    .frame(width: 375, height: 210)
-                Text("")
+                HStack{
+                    
+                    Spacer()
+                    Link(destination: URL(string: "https://sites.google.com/view/organic-chem-games/home")!) {
+                        Image(systemName: "questionmark.circle")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .padding(.trailing)
+                            .foregroundColor(.gray)
+                    }
+                }
+                    Image("OrganicGamesTitle")
+                        .resizable()
+                        .frame(width: 375, height: 210)
+                    
+        
+
+                
                 Divider()
                 Text("")
                 Button(action: {
@@ -65,19 +76,8 @@ struct GameChoiceView: View {
                 Spacer()
             }
             .navigationDestination(for: GameType.self) { gameType in
-                GameView(path: $path, /*tileRange: getTileRange(for: gameType),*/ gameType: gameType)
+                GameView(path: $path, gameType: gameType)
             }
         }
     }
-
-//    private func getTileRange(for gameType: GameType) -> ClosedRange<Int> {
-//        switch gameType {
-//        case .game1:
-//            return 1...18
-//        case .game2:
-//            return 19...34
-//        case .game3:
-//            return 1...23
-//        }
-//    }
 }

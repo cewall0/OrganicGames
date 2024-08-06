@@ -1,9 +1,3 @@
-//
-//  Word.swift
-//  Bible Memorization
-//
-//  Created by Chad Wallace on 2/21/24.
-//
 
 import Foundation
 import Observation

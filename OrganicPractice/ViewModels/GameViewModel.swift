@@ -47,9 +47,9 @@ final class GameViewModel {
                 tiles = allTileNames.map { Tile(name: $0) }.shuffled()
                 
             case .game4:
-                let atomTileNames = (1...17).map { "G4_Atom\($0)" }
+                let atomTileNames = (1...18).map { "G4_Atom\($0)" }
                 let sp1TileNames = Array(repeating: "G4_sp1", count: 4)
-                let sp2TileNames = Array(repeating: "G4_sp2", count: 5)
+                let sp2TileNames = Array(repeating: "G4_sp2", count: 6)
                 let sp3TileNames = Array(repeating: "G4_sp3", count: 8)
                 let allTileNames = atomTileNames + sp1TileNames + sp2TileNames + sp3TileNames
                 tiles = allTileNames.map { Tile(name: $0) }.shuffled()
@@ -197,9 +197,6 @@ final class GameViewModel {
         }
     }
 
-
-
-
     func selectTile(_ tile: Tile) {
         if selectedTiles.count < 2 {
             selectedTiles.append(tile)
@@ -260,12 +257,12 @@ final class GameViewModel {
                 let isMatch: Bool
                 if tile1.name.starts(with: "G4_Atom") && tile2.name.starts(with: "G4_sp") {
                     isMatch = (tile1.number <= 4 && tile2.name == "G4_sp1") ||
-                    (tile1.number >= 5 && tile1.number <= 9 && tile2.name == "G4_sp2") ||
-                    (tile1.number >= 10 && tile1.number <= 17 && tile2.name == "G4_sp3")
+                    (tile1.number >= 5 && tile1.number <= 10 && tile2.name == "G4_sp2") ||
+                    (tile1.number >= 11 && tile1.number <= 18 && tile2.name == "G4_sp3")
                 } else if tile2.name.starts(with: "G4_Atom") && tile1.name.starts(with: "G4_sp") {
                     isMatch = (tile2.number <= 4 && tile1.name == "G4_sp1") ||
-                    (tile2.number >= 5 && tile2.number <= 9 && tile1.name == "G4_sp2") ||
-                    (tile2.number >= 10 && tile2.number <= 17 && tile1.name == "G4_sp3")
+                    (tile2.number >= 5 && tile2.number <= 10 && tile1.name == "G4_sp2") ||
+                    (tile2.number >= 11 && tile2.number <= 18 && tile1.name == "G4_sp3")
                 } else {
                     isMatch = false
                 }
