@@ -23,33 +23,43 @@ final class GameViewModel {
         resetGame(for: gameType)
     }
 
-    func resetGame(for gameType: GameType) {
-        switch gameType {
-        case .game1:
-            let tileNames = (1...18).map { ["G1_Tile\($0)A", "G1_Tile\($0)B"] }
-            let shuffledPairs = tileNames.shuffled()
-            let tileStrings = shuffledPairs.flatMap { $0 }
-            tiles = tileStrings.map { Tile(name: $0) }
-            
-        case .game2:
-            let tileNames = (19...34).map { ["G2_Tile\($0)A", "G2_Tile\($0)B"] }
-            let shuffledPairs = tileNames.shuffled()
-            let tileStrings = shuffledPairs.flatMap { $0 }
-            tiles = tileStrings.map { Tile(name: $0) }
-           
-        case .game3:
-            let atomTileNames = (1...20).map { "G3_Atom\($0)" }
-            let chargeMinusTileNames = Array(repeating: "G3_Charge_minus", count: 3)
-            let chargeZeroTileNames = Array(repeating: "G3_Charge0", count: 12)
-            let chargePlusTileNames = Array(repeating: "G3_Charge_plus", count: 5)
-            let allTileNames = atomTileNames + chargeMinusTileNames + chargeZeroTileNames + chargePlusTileNames
-            tiles = allTileNames.map { Tile(name: $0) }.shuffled()
+
+        func resetGame(for gameType: GameType) {
+            switch gameType {
+            case .game1:
+                let tileNames = (1...20).map { ["G1_Tile\($0)A", "G1_Tile\($0)B"] }
+                let shuffledPairs = tileNames.shuffled()
+                let tileStrings = shuffledPairs.flatMap { $0 }
+                tiles = tileStrings.map { Tile(name: $0) }
+                
+            case .game2:
+                let tileNames = (19...34).map { ["G2_Tile\($0)A", "G2_Tile\($0)B"] }
+                let shuffledPairs = tileNames.shuffled()
+                let tileStrings = shuffledPairs.flatMap { $0 }
+                tiles = tileStrings.map { Tile(name: $0) }
+               
+            case .game3:
+                let atomTileNames = (1...20).map { "G3_Atom\($0)" }
+                let chargeMinusTileNames = Array(repeating: "G3_Charge_minus", count: 3)
+                let chargeZeroTileNames = Array(repeating: "G3_Charge0", count: 12)
+                let chargePlusTileNames = Array(repeating: "G3_Charge_plus", count: 5)
+                let allTileNames = atomTileNames + chargeMinusTileNames + chargeZeroTileNames + chargePlusTileNames
+                tiles = allTileNames.map { Tile(name: $0) }.shuffled()
+                
+            case .game4:
+                let atomTileNames = (1...17).map { "G4_Atom\($0)" }
+                let sp1TileNames = Array(repeating: "G4_sp1", count: 4)
+                let sp2TileNames = Array(repeating: "G4_sp2", count: 5)
+                let sp3TileNames = Array(repeating: "G4_sp3", count: 8)
+                let allTileNames = atomTileNames + sp1TileNames + sp2TileNames + sp3TileNames
+                tiles = allTileNames.map { Tile(name: $0) }.shuffled()
+            }
+            selectedTiles = []
+            tilePositions = [:]
+            tileRotations = [:]
+            generateRandomPositionsAndRotations()
         }
-        selectedTiles = []
-        tilePositions = [:]
-        tileRotations = [:]
-        generateRandomPositionsAndRotations()
-    }
+ 
 
     func generateRandomPositionsAndRotations() {
         let screenWidth = UIScreen.main.bounds.width
@@ -245,9 +255,35 @@ final class GameViewModel {
                         self.selectedTiles.removeAll()
                     }
                 }
+            } // end if game 1 or game 2
+            else if gameType == .game4 {
+                let isMatch: Bool
+                if tile1.name.starts(with: "G4_Atom") && tile2.name.starts(with: "G4_sp") {
+                    isMatch = (tile1.number <= 4 && tile2.name == "G4_sp1") ||
+                    (tile1.number >= 5 && tile1.number <= 9 && tile2.name == "G4_sp2") ||
+                    (tile1.number >= 10 && tile1.number <= 17 && tile2.name == "G4_sp3")
+                } else if tile2.name.starts(with: "G4_Atom") && tile1.name.starts(with: "G4_sp") {
+                    isMatch = (tile2.number <= 4 && tile1.name == "G4_sp1") ||
+                    (tile2.number >= 5 && tile2.number <= 9 && tile1.name == "G4_sp2") ||
+                    (tile2.number >= 10 && tile2.number <= 17 && tile1.name == "G4_sp3")
+                } else {
+                    isMatch = false
+                }
+                
+                if isMatch {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.tiles.removeAll { $0.id == tile1.id || $0.id == tile2.id }
+                        self.selectedTiles.removeAll()
+                        if self.tiles.isEmpty {
+                            self.gameCompleted = true
+                        }
+                    }
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.selectedTiles.removeAll()
+                    }
+                }
             }
-        }
+        } // end if
     } // end checkMatch function
-
-
 }

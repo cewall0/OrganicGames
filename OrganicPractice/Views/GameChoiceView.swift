@@ -54,6 +54,14 @@ struct GameChoiceView: View {
                     Text("Formal Charges")
                 })
                 Text("")
+                Button(action: {
+                    reset()
+                    viewModel.gameType = .game4
+                    viewModel.resetGame(for: .game4)
+                    path.append(GameType.game4)
+                }, label: {
+                    Text("Hybridization")
+                })
                 Spacer()
             }
             .navigationDestination(for: GameType.self) { gameType in

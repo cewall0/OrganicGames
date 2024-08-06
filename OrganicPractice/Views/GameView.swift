@@ -53,7 +53,7 @@ struct GameView: View {
                     
                     Text(" ")
                     
-                    Button("Choose another game") {
+                    Button("Choose different game") {
                         
                         viewModel.gameCompleted = false
                         resetPath()
@@ -64,6 +64,8 @@ struct GameView: View {
                     .foregroundColor(.white)
                     .cornerRadius(10)
                     
+                    Text(" ")
+                    Text(" ")
                 }
                 .background(Color.white.opacity(0.8))
                 .cornerRadius(20)
@@ -73,16 +75,16 @@ struct GameView: View {
                 VStack {
                     Spacer()
                     HStack {
-                        Button("Reset Game") {
-                            
-                            viewModel.gameCompleted = false
-                            viewModel.resetGame(for: gameType)
-                             
-                        }
-                        .padding()
-                        .background(.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+//                        Button("Reset Game") {
+//                            
+//                            viewModel.gameCompleted = false
+//                            viewModel.resetGame(for: gameType)
+//                             
+//                        }
+//                        .padding()
+//                        .background(.blue)
+//                        .foregroundColor(.white)
+//                        .cornerRadius(10)
                         
                         Button("Scramble Existing Tiles") {
                             viewModel.scrambleRemainingTiles()

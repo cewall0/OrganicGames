@@ -29,29 +29,25 @@ struct Tile: Identifiable {
         if name.hasPrefix("G3_Atom") || name.hasPrefix("G3_Charge") {
             return ""
         }
+        if name.hasPrefix("G4_Atom") || name.hasPrefix("G4_sp") {
+            return ""
+        }
         return String(name.suffix(1))
     }
     
     var imageName: String {
-//        // Return corresponding image name
-//        switch name {
-//        case "Charge_plus":
-//            return "charge_plus"
-//        case "Charge0":
-//            return "charge_zero"
-//        case "Charge_minus":
-//            return "charge_minus"
-//        default:
             return name
-//        }
     }
     
     var isAtom: Bool {
-           return name.hasPrefix("G3_Atom")
-       }
+        if name.hasPrefix("G3_Atom") || name.hasPrefix("G4_Atom"){
+            return true
+        }
+        else {
+            return false
+        }
+    }
        
-    var isCharge: Bool {
-           return name.hasPrefix("G3_Charge")
-       }
+    
     
 }
