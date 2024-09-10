@@ -7,33 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B743ADE2C62F2730036DF60 /* GameType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B743AC92C62F2730036DF60 /* GameType.swift */; };
-		0B743ADF2C62F2730036DF60 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B743ACA2C62F2730036DF60 /* Tile.swift */; };
-		0B743AE02C62F2730036DF60 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B743ACC2C62F2730036DF60 /* GameViewModel.swift */; };
-		0B743AE12C62F2730036DF60 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B743ACE2C62F2730036DF60 /* Preview Assets.xcassets */; };
-		0B743AE22C62F2730036DF60 /* PeriodicTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B743AD02C62F2730036DF60 /* PeriodicTable.swift */; };
-		0B743AE32C62F2730036DF60 /* PeriodicTableGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B743AD12C62F2730036DF60 /* PeriodicTableGameView.swift */; };
-		0B743AE42C62F2730036DF60 /* GameChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B743AD32C62F2730036DF60 /* GameChoiceView.swift */; };
-		0B743AE52C62F2730036DF60 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B743AD42C62F2730036DF60 /* GameView.swift */; };
-		0B743AE62C62F2730036DF60 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B743AD52C62F2730036DF60 /* SplashScreenView.swift */; };
-		0B743AE72C62F2730036DF60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B743AD72C62F2730036DF60 /* Assets.xcassets */; };
-		0B743AE82C62F2730036DF60 /* OrganicGamesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B743AD82C62F2730036DF60 /* OrganicGamesApp.swift */; };
+		0B743B272C6583930036DF60 /* GameType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B743B162C6583930036DF60 /* GameType.swift */; };
+		0B743B282C6583930036DF60 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B743B172C6583930036DF60 /* Tile.swift */; };
+		0B743B292C6583930036DF60 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B743B192C6583930036DF60 /* Preview Assets.xcassets */; };
+		0B743B2A2C6583930036DF60 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B743B1B2C6583930036DF60 /* GameViewModel.swift */; };
+		0B743B2D2C6583930036DF60 /* GameChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B743B202C6583930036DF60 /* GameChoiceView.swift */; };
+		0B743B2E2C6583930036DF60 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B743B212C6583930036DF60 /* GameView.swift */; };
+		0B743B2F2C6583930036DF60 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B743B222C6583930036DF60 /* SplashScreenView.swift */; };
+		0B743B302C6583930036DF60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B743B242C6583930036DF60 /* Assets.xcassets */; };
+		0B743B312C6583930036DF60 /* OrganicGamesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B743B252C6583930036DF60 /* OrganicGamesApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0B47D9582C4EDEB8008F94E0 /* OrganicGames.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrganicGames.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0B743AC92C62F2730036DF60 /* GameType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameType.swift; sourceTree = "<group>"; };
-		0B743ACA2C62F2730036DF60 /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
-		0B743ACC2C62F2730036DF60 /* GameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
-		0B743ACE2C62F2730036DF60 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		0B743AD02C62F2730036DF60 /* PeriodicTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeriodicTable.swift; sourceTree = "<group>"; };
-		0B743AD12C62F2730036DF60 /* PeriodicTableGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeriodicTableGameView.swift; sourceTree = "<group>"; };
-		0B743AD32C62F2730036DF60 /* GameChoiceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameChoiceView.swift; sourceTree = "<group>"; };
-		0B743AD42C62F2730036DF60 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
-		0B743AD52C62F2730036DF60 /* SplashScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
-		0B743AD72C62F2730036DF60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0B743AD82C62F2730036DF60 /* OrganicGamesApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganicGamesApp.swift; sourceTree = "<group>"; };
-		0B743ADA2C62F2730036DF60 /* OrganicGames.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = OrganicGames.xcodeproj; sourceTree = "<group>"; };
+		0B743B162C6583930036DF60 /* GameType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameType.swift; sourceTree = "<group>"; };
+		0B743B172C6583930036DF60 /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
+		0B743B192C6583930036DF60 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		0B743B1B2C6583930036DF60 /* GameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		0B743B202C6583930036DF60 /* GameChoiceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameChoiceView.swift; sourceTree = "<group>"; };
+		0B743B212C6583930036DF60 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		0B743B222C6583930036DF60 /* SplashScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
+		0B743B242C6583930036DF60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0B743B252C6583930036DF60 /* OrganicGamesApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganicGamesApp.swift; sourceTree = "<group>"; };
+		0B743B322C65869E0036DF60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +46,7 @@
 		0B47D94F2C4EDEB8008F94E0 = {
 			isa = PBXGroup;
 			children = (
-				0B743ADB2C62F2730036DF60 /* OrganicGames */,
+				0B743B262C6583930036DF60 /* OrganicGames */,
 				0B47D9592C4EDEB8008F94E0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -63,76 +59,53 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0B743ACB2C62F2730036DF60 /* Models */ = {
+		0B743B182C6583930036DF60 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				0B743AC92C62F2730036DF60 /* GameType.swift */,
-				0B743ACA2C62F2730036DF60 /* Tile.swift */,
+				0B743B162C6583930036DF60 /* GameType.swift */,
+				0B743B172C6583930036DF60 /* Tile.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		0B743ACD2C62F2730036DF60 /* ViewModels */ = {
+		0B743B1A2C6583930036DF60 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				0B743ACC2C62F2730036DF60 /* GameViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		0B743ACF2C62F2730036DF60 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				0B743ACE2C62F2730036DF60 /* Preview Assets.xcassets */,
+				0B743B192C6583930036DF60 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		0B743AD22C62F2730036DF60 /* Unused */ = {
+		0B743B1C2C6583930036DF60 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				0B743AD02C62F2730036DF60 /* PeriodicTable.swift */,
-				0B743AD12C62F2730036DF60 /* PeriodicTableGameView.swift */,
+				0B743B1B2C6583930036DF60 /* GameViewModel.swift */,
 			);
-			path = Unused;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		0B743AD62C62F2730036DF60 /* Views */ = {
+		0B743B232C6583930036DF60 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0B743ACF2C62F2730036DF60 /* Preview Content */,
-				0B743AD22C62F2730036DF60 /* Unused */,
-				0B743AD32C62F2730036DF60 /* GameChoiceView.swift */,
-				0B743AD42C62F2730036DF60 /* GameView.swift */,
-				0B743AD52C62F2730036DF60 /* SplashScreenView.swift */,
+				0B743B202C6583930036DF60 /* GameChoiceView.swift */,
+				0B743B212C6583930036DF60 /* GameView.swift */,
+				0B743B222C6583930036DF60 /* SplashScreenView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		0B743AD92C62F2730036DF60 /* OrganicGamesApp */ = {
+		0B743B262C6583930036DF60 /* OrganicGames */ = {
 			isa = PBXGroup;
 			children = (
-				0B743ACB2C62F2730036DF60 /* Models */,
-				0B743ACD2C62F2730036DF60 /* ViewModels */,
-				0B743AD62C62F2730036DF60 /* Views */,
-				0B743AD72C62F2730036DF60 /* Assets.xcassets */,
-				0B743AD82C62F2730036DF60 /* OrganicGamesApp.swift */,
+				0B743B322C65869E0036DF60 /* Info.plist */,
+				0B743B252C6583930036DF60 /* OrganicGamesApp.swift */,
+				0B743B182C6583930036DF60 /* Models */,
+				0B743B1A2C6583930036DF60 /* Preview Content */,
+				0B743B1C2C6583930036DF60 /* ViewModels */,
+				0B743B232C6583930036DF60 /* Views */,
+				0B743B242C6583930036DF60 /* Assets.xcassets */,
 			);
-			path = OrganicGamesApp;
-			sourceTree = "<group>";
-		};
-		0B743ADB2C62F2730036DF60 /* OrganicGames */ = {
-			isa = PBXGroup;
-			children = (
-				0B743AD92C62F2730036DF60 /* OrganicGamesApp */,
-				0B743ADA2C62F2730036DF60 /* OrganicGames.xcodeproj */,
-			);
-			name = OrganicGames;
-			sourceTree = "<group>";
-		};
-		0B743ADC2C62F2730036DF60 /* Products */ = {
-			isa = PBXGroup;
-			name = Products;
+			path = OrganicGames;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,12 +154,6 @@
 			mainGroup = 0B47D94F2C4EDEB8008F94E0;
 			productRefGroup = 0B47D9592C4EDEB8008F94E0 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 0B743ADC2C62F2730036DF60 /* Products */;
-					ProjectRef = 0B743ADA2C62F2730036DF60 /* OrganicGames.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				0B47D9572C4EDEB8008F94E0 /* OrganicGames */,
@@ -199,8 +166,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B743AE72C62F2730036DF60 /* Assets.xcassets in Resources */,
-				0B743AE12C62F2730036DF60 /* Preview Assets.xcassets in Resources */,
+				0B743B302C6583930036DF60 /* Assets.xcassets in Resources */,
+				0B743B292C6583930036DF60 /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,15 +178,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B743AE02C62F2730036DF60 /* GameViewModel.swift in Sources */,
-				0B743AE22C62F2730036DF60 /* PeriodicTable.swift in Sources */,
-				0B743ADE2C62F2730036DF60 /* GameType.swift in Sources */,
-				0B743AE32C62F2730036DF60 /* PeriodicTableGameView.swift in Sources */,
-				0B743ADF2C62F2730036DF60 /* Tile.swift in Sources */,
-				0B743AE42C62F2730036DF60 /* GameChoiceView.swift in Sources */,
-				0B743AE82C62F2730036DF60 /* OrganicGamesApp.swift in Sources */,
-				0B743AE52C62F2730036DF60 /* GameView.swift in Sources */,
-				0B743AE62C62F2730036DF60 /* SplashScreenView.swift in Sources */,
+				0B743B2A2C6583930036DF60 /* GameViewModel.swift in Sources */,
+				0B743B272C6583930036DF60 /* GameType.swift in Sources */,
+				0B743B282C6583930036DF60 /* Tile.swift in Sources */,
+				0B743B2D2C6583930036DF60 /* GameChoiceView.swift in Sources */,
+				0B743B312C6583930036DF60 /* OrganicGamesApp.swift in Sources */,
+				0B743B2E2C6583930036DF60 /* GameView.swift in Sources */,
+				0B743B2F2C6583930036DF60 /* SplashScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,17 +317,17 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = OrganicGamesApp/Views/;
 				DEVELOPMENT_TEAM = YZ8ZVD6D26;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/OrganicGames/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Organic Games";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.educational-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INSTALL_PATH = /Applications;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -383,17 +348,17 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = OrganicGamesApp/Views/;
 				DEVELOPMENT_TEAM = YZ8ZVD6D26;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/OrganicGames/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Organic Games";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.educational-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INSTALL_PATH = /Applications;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
